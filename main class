@@ -1,0 +1,54 @@
+package ecommerce;
+import java.util.Scanner;
+public class Ecommerce {
+    public static void main(String[] args) {
+          Scanner input=new Scanner(System.in);
+          ElectronicProduct p1=new ElectronicProduct(1,"smartphone",599.9,"samsung",1);
+          ClothingProduct p2=new ClothingProduct(2,"t-shirt",19.99,"medium","cotton");
+          BookProduct p3=new BookProduct(3,"OOP",39.99,"O'reilly","X publications");
+          System.out.println("enter your ID: ");
+          int customerId=input.nextInt();
+          System.out.println("enter your name: ");
+          String name=input.next();
+          System.out.println("enter your address: ");
+          String address=input.next();
+          Customer customer=new Customer(customerId,name,address);
+          System.out.println("how many products do you want ?");
+          int nproduct=input.nextInt();   
+          Product []products=new Product[nproduct];
+Cart C=new Cart(customerId,nproduct, products);
+double total=0;
+for(int i=0;i<nproduct;i++){
+    Product product;
+    System.out.println("which product would you like to add ? 1- smartphone 2- T-shirt 3- OOP ");
+int answer=input.nextInt();
+switch(answer){
+    case 1:
+        products[i]=p1;
+     break;
+    case 2:
+        products[i]=p2;
+        break;
+    case 3:
+        products[i]=p3;
+        break;
+    default:
+        System.out.println("unavilable product");
+        break;
+}
+total+=products[i].getPrice();
+C.addProduct(products[i]);
+}
+System.out.println("your total is: "+total);
+    System.out.println("would you to place the order? 1- yes 2- no");
+    int response=input.nextInt();
+    if(response==1){
+        C.placeOrder();}
+   Order o=new Order(customerId,products,total);
+o.printOrderInfo();
+    }
+    }
+
+
+
+    
